@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertArrayEquals;
 
 /**
  * Unit Testing for the QuickSort and MergeSort multithreaded programs.
