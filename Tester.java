@@ -3,6 +3,9 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.Random;
 import java.util.Arrays;
 
+/**
+ * Tester runs the QuickSort and MergeSort multithreaded programs on array with 100,000 values.
+ */
 public class Tester {
 
     static final int SIZE = 100000;

@@ -3,6 +3,9 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.RecursiveAction;
 
+/**
+ * QuickSortTask2: runs quicksort on a sublist.
+ */
 public class QuickSortTask2 extends RecursiveAction {
     ArrayList<Integer> numbers;
     private int lo, hi;
@@ -17,12 +20,9 @@ public class QuickSortTask2 extends RecursiveAction {
     {
         if (lo < hi)
         {
-        /* pi is partitioning index, arr[pi] is now
-           at right place */
             int pi = partition(lo, hi);
-
-            quickSort( lo, pi - 1);  // Before pi
-            quickSort( pi + 1, hi); // After pi
+            quickSort( lo, pi - 1);
+            quickSort( pi + 1, hi);
         }
     }
 

@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.RecursiveAction;
 
+/**
+ * MergeSortTask2: runs mergesort on a sublist.
+ */
 public class MergeSortTask2 extends RecursiveAction {
     ArrayList<Integer> numbers;
     private int lo;
@@ -20,7 +23,6 @@ public class MergeSortTask2 extends RecursiveAction {
             int mid = (lo + hi) / 2;
             mergesort(lo, mid);
             mergesort( mid+1 , hi);
-            //merge( lo, mid, hi);
         }
     }
 

@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.RecursiveAction;
 
+/**
+ * MergeSortTask: runs selection sort on small arrays and forks two threads to sort two sublists
+ * of larger arrays. Then, merges them.
+ */
 public class MergeSortTask extends RecursiveAction {
     ArrayList<Integer> numbers;
     private int lo;

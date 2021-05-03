@@ -3,6 +3,10 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.RecursiveAction;
 
+/**
+ * QuickSortTask: runs selection sort on small arrays and forks two threads to sort two sublists
+ * of larger arrays.
+ */
 public class QuickSortTask extends RecursiveAction {
     ArrayList<Integer> numbers;
     private int lo, hi;
