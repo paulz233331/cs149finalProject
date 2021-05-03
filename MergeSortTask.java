@@ -17,21 +17,11 @@ public class MergeSortTask extends RecursiveAction {
 
     MergeSortTask(ArrayList<Integer> numbers) { this(numbers, 0, numbers.size()-1);};
 
-    protected void mergesort(int lo, int hi) {
-        if (lo < hi) {
-            int mid = (lo + hi) / 2;
-            mergesort(lo, mid);
-            mergesort( mid+1 , hi);
-            merge( lo, mid, hi);
-        }
-    }
-
     @Override
     protected void compute() {
         if (hi - lo <= THRESHOLD)
             selectionSort(lo, hi);
         else {
-            mergesort(lo, hi);
             MergeSortTask sortTask1 = new MergeSortTask(numbers, lo, mid);
             MergeSortTask sortTask2 = new MergeSortTask(numbers, mid +1, hi);
             sortTask1.fork();

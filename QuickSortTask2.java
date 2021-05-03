@@ -3,48 +3,37 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.RecursiveAction;
 
-public class QuickSortTask extends RecursiveAction {
+public class QuickSortTask2 extends RecursiveAction {
     ArrayList<Integer> numbers;
     private int lo, hi;
 
-    QuickSortTask(ArrayList<Integer> numbers, int lo, int hi) {
+    QuickSortTask2(ArrayList<Integer> numbers, int lo, int hi) {
         this.numbers = numbers; this.lo = lo; this.hi = hi;
     }
 
-    QuickSortTask(ArrayList<Integer> numbers) { this(numbers, 0, numbers.size()-1);};
+    QuickSortTask2(ArrayList<Integer> numbers) { this(numbers, 0, numbers.size()-1);};
 
-    void selectionSort(int lo, int hi)
+    protected void quickSort(int lo, int hi)
     {
-        int i, j, min_idx;
-
-        for (i = lo; i <= hi-1; i++)
+        if (lo < hi)
         {
-            min_idx = i;
-            for (j = i+1; j <= hi; j++)
-                if (numbers.get(j) < numbers.get(min_idx))
-                    min_idx = j;
-            swap(min_idx, i);
+        /* pi is partitioning index, arr[pi] is now
+           at right place */
+            int pi = partition(lo, hi);
+
+            quickSort( lo, pi - 1);  // Before pi
+            quickSort( pi + 1, hi); // After pi
         }
     }
-
-    static final int THRESHOLD = 100;
 
     @Override
     protected void compute() {
-        if (hi - lo <= THRESHOLD)
-            selectionSort(lo, hi);
-        else {
-            int p = partition();
-            QuickSortTask2 sortTask1 = new QuickSortTask2(numbers, lo, p-1);
-            QuickSortTask2 sortTask2 = new QuickSortTask2(numbers, p+1, hi);
-            sortTask1.fork();
-            sortTask2.fork();
-            sortTask1.join();
-            sortTask2.join();
-        }
+        int p = partition(lo, hi);
+        quickSort(lo, p-1);
+        quickSort(p+1, hi);
     }
 
-    public int partition() {
+    public int partition(int lo, int hi) {
         int i = lo, j = hi;
         int pivot = (lo + hi) >>> 1;
         swap (pivot, j--);
