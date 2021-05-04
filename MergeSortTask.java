@@ -36,24 +36,36 @@ public class MergeSortTask extends RecursiveAction {
         }
     }
 
-    void merge( int lo, int mid, int hi) {
-        ArrayList<Integer> helper = new ArrayList<Integer>(numbers);
-        int helperLeft = lo;
-        int helperRight = mid + 1;
-        int current = lo;
+    void merge( int lo, int mid, int hi)
+    {
+        int n1 = mid - lo + 1;
+        int n2 = hi - mid;
+        ArrayList<Integer> left = new ArrayList<Integer>(n1);
+        ArrayList<Integer> right = new ArrayList<Integer>(n2);
 
-        while (helperLeft <= mid && helperRight <= hi) {
-            if (helper.get(helperLeft) <= helper.get(helperRight)) {
-                numbers.set(current, helper.get(helperLeft++));
-            } else {
-                numbers.set(current, helper.get(helperRight++));
+        for (int i = 0; i < n1; ++i)
+            left.add(numbers.get(lo + i));
+        for (int j = 0; j < n2; ++j)
+            right.add(numbers.get(mid+1+j));
+
+        int i = 0, j = 0;
+        int k = lo;
+
+        while (i < n1 && j < n2) {
+            if (left.get(i) <= right.get(j)) {
+                numbers.set(k, left.get(i++));
             }
-            current++;
+            else {
+                numbers.set(k, right.get(j++));
+            }
+            k++;
         }
 
-        while (helperLeft <= mid) {
-            numbers.set(current++, helper.get(helperLeft++));
-        }
+        while (i < n1)
+            numbers.set(k++, left.get(i++));
+
+        while (j < n2)
+            numbers.set(k++, right.get(j++));
     }
 
     void selectionSort(int lo, int hi)

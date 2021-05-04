@@ -23,7 +23,40 @@ public class MergeSortTask2 extends RecursiveAction {
             int mid = (lo + hi) / 2;
             mergesort(lo, mid);
             mergesort( mid+1 , hi);
+            merge(lo,mid,hi);
         }
+    }
+
+    void merge( int lo, int mid, int hi)
+    {
+        int n1 = mid - lo + 1;
+        int n2 = hi - mid;
+        ArrayList<Integer> left = new ArrayList<Integer>(n1);
+        ArrayList<Integer> right = new ArrayList<Integer>(n2);
+
+        for (int i = 0; i < n1; ++i)
+            left.set(i, numbers.get(lo + i));
+        for (int j = 0; j < n2; ++j)
+            right.set(j, numbers.get(mid+1+j));
+
+        int i = 0, j = 0;
+        int k = lo;
+
+        while (i < n1 && j < n2) {
+            if (left.get(i) <= right.get(j)) {
+                numbers.set(k, left.get(i++));
+            }
+            else {
+                numbers.set(k, right.get(j++));
+            }
+            k++;
+        }
+
+        while (i < n1)
+            numbers.set(k++, left.get(i++));
+
+        while (j < n2)
+            numbers.set(k++, right.get(j++));
     }
 
     @Override
